@@ -15,8 +15,10 @@ const Home = () => {
     const navigate = useNavigate()
 
     const handleGenerateReport = async () => {
+        if (!jobDescription.trim()) return
+        if (!resumeFile && !selfDescription.trim()) return
         const data = await generateReport({ jobDescription, selfDescription, resumeFile })
-        navigate(`/interview/${data._id}`)
+        if (data) navigate(`/interview/${data._id}`)
     }
 
     const handleFileChange = (e) => {
